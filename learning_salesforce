@@ -1,0 +1,223 @@
+public class learning_salesforce {
+    
+    //Learning_Salesforce.firstmethod();
+    public static void firstmethod(){
+        integer t = 2;
+        integer y = 3;
+        integer i = t+y;
+        system.debug('123' + i);
+    }
+    public static integer equalten(){
+        integer f = 4;
+        integer s = 6;
+        integer t = f+s;
+        return t;
+        
+    }
+    public static void debugmethod(){
+        system.debug(equalten());
+    }
+    public static void CreateAccount(){
+        Lead l = new Lead();
+        l.Company = 'My New Company';
+        l.FirstName = 'Test';
+        l.LastName = 'Tester';
+        l.Status = 'Open';
+        insert l;  
+    }
+    
+    public static Lead CreateLeadTwo() {
+        Lead l2 = new Lead();
+        l2.Company = 'Lance Dev';
+        l2.FirstName = 'Lance';
+        l2.LastName = 'High';
+        l2.Status = 'CustomStatus';
+        insert l2;
+        return l2;
+    }
+    
+    public static Lead CreateLeadThree(){
+        Lead l3 = new Lead();
+        l3.Company = 'Seb Dev';
+        l3.FirstName = 'Sebastian';
+        l3.LastName = 'Steele';
+        l3.Status = 'Closed';
+        insert l3;
+        return l3;
+    }
+    public static Lead CreateLead(){
+        Lead le = new Lead();
+        le.Company = 'My newest Company';
+        le.FirstName = 'Prueba';
+        le.LastName = 'Codigo';
+        le.Status = 'Open';
+        insert le;
+        return le;
+    }
+    public static void CreateContact(){
+        Contact c = new Contact();
+        c.LastName = 'Chin';
+        c.FirstName = 'Crimson';
+        c.Salutation = 'Mr.';
+        c.Title = 'Definitely Not CEO';
+        insert c;
+    }
+    
+    public static Contact CreateContact2(){
+        Contact co = new Contact();
+        co.LastName = 'Judge';
+        co.FirstName = 'Aaron';
+        co.Salutation = 'Mr.';
+        co.Title = 'Definitely the CEO';
+        insert co;
+        return co;
+    }
+    
+    public static Contact CreateContact3(){
+        Contact c3 = new Contact();
+        c3.LastName = 'High';
+        c3.FirstName = 'Lance';
+        c3.Salutation = 'Mr.';
+        c3.Title = 'Intern';
+		c3.Tier__c =  'Tier 1';
+        insert c3;
+        return c3;
+    }
+    
+    public static void secondmethod(){
+        string t = '2';
+        string y = '3';
+        
+        system.debug('321' + t + y + t);
+    }
+    public static integer thirdmethod(){
+        string s = '3';
+        integer i = 30;
+        integer is = integer.valueOf(s)+i;
+        return is;
+    }
+    public static integer fourthmethod(){
+        integer i = 1;
+        integer w = 1;
+        integer iw = i + w;
+        return iw;
+        
+    }
+
+    public static List<Integer> CreateList(){
+        // Create a list
+        List<Integer> ls1 = new List<Integer>();
+        // Add two integers to the list
+        ls1.add(1);
+        ls1.add(2);
+        system.debug(ls1 + ' debuglist1');
+        return ls1;
+    }
+    
+    public static void CreateList2(){
+        List<Integer> ls2 = new List<Integer>();
+        ls2.add(1);
+        ls2.add(2);
+        system.debug(ls2 + ' debugList2');
+    }
+    
+    public static List<String> CreateStringList(){
+        List<String> lstString = new List<String>();
+        lstString.add('Hello World');
+        return lstString;
+    }
+    
+    public static void Create2Contacts(){
+        Contact c1 = new Contact();
+        c1.LastName = 'High';
+        c1.FirstName = 'Kenneth';
+        c1.Salutation = 'Mr.';
+        Contact c2 = new Contact();
+        c2.LastName = 'High2';
+        c2.FirstName = 'Kenneth';
+        c2.Salutation = 'Mr.';
+        List<Contact> lstC = new List<Contact>();
+        lstC.add(c1);
+        lstC.add(c2);
+        insert lstC;
+
+    }
+    
+    
+    public static void CreateListString(){
+        List<String> ls2 = new List<String>();
+        ls2.add('AY');
+        ls2.add('YO');
+        system.debug(ls2 + ' Debug' + ls2[1]);
+    }
+    public static void MyQuery(){
+        List<Account> accts = [SELECT Name from Account where Name = 'GenePoint']; //select-from-where
+        system.debug('actlist' + accts);
+        //system.debug('list3' + accts[2]);
+    }
+    public static void MyLoopFirst(){
+       /* List<Account> acctlist1 = [SELECT Id from Account];
+        Account acctlist2 = [SELECT Id, Name from Account limit 1];
+        List<Account> acctlist9 = [SELECT Name from Account];
+        Id oppRecordTypeId = Schema.SObjectType.Opportunity.getRecordTypeInfosByName().get('Patient Opportunity Record Type').getRecordTypeId();
+        List<Opportunity> opplist5 = [SELECT Name from Opportunity WHERE RecordTypeId = :oppRecordTypeId];
+            
+        for (sObject o : opplist5){
+            System.debug(o);
+        }    
+        
+        acctlist2.Name = 'Big';
+        update acctlist2;
+        
+        long bigNum = 3000000000L;
+        //acctlist3.AnnualRevenue = bigNum;
+        //update acctlist3;
+        
+        for (Account i : acctlist1) {
+            System.debug(i);
+        }
+        
+        //for (Account o : acctlist9) {
+        //    system.debug(o);
+        //}
+        
+        //system.debug('Acctlist1' + acctlist1);
+        //
+        //
+*/        
+    }
+    public static void MapTest() {
+        List<Contact> contacts = [Select ID, AccountID From Contact where AccountId != null];
+        map<Id, Contact> m = new map<Id, Contact>();
+        for(Contact c : contacts){
+            m.put(c.AccountId, c);
+        }
+        system.debug('Map1' + m);
+        system.debug('MapIndex' + m.get(contacts[0].AccountID));
+    }
+    public static void ListMap(){
+        list<Contact> contacts = [Select Id, AccountId from Contact];
+        list<Account> accts = [Select Id from Account];
+        for(Contact c : contacts){
+            for(Account a : accts){
+                if(c.AccountId == a.Id){
+                    system.debug('Account ' + a);
+                    system.debug('Contact' + c);
+                }
+            }
+        }
+    }
+    public static void Recap1(){
+        list<Account> accts1 = [Select Id, Name from Account where Name = 'Batman']; //Where & Select match fields
+        list<Account> accts2 = [Select Id from Account]; //select from where = SOQL
+        list<Account> accts3 = [Select Id from Account];
+        list<Account> accts4 = [Select Id from Account];
+        list<Account> accts5 = [Select Id from Account];
+        list<Account> accts6;
+        accts6.add(accts1[1]);
+        string accts7;
+        Account a = new Account();
+        a.Name = 'NewInc';
+        insert a;
+    }
+}
