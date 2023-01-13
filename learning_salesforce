@@ -186,8 +186,16 @@ public class learning_salesforce {
         //
 */        
     }
+    public static void MyLoopSecond(){
+        integer i = 0;
+        List<sObject> lstAcc = [SELECT Name FROM Account];
+        for (sObject acc : lstAcc) {
+			i++;
+        }
+        system.debug(i);
+    }
     public static void MapTest() {
-        List<Contact> contacts = [Select ID, AccountID From Contact where AccountId != null];
+        List<Contact> contacts = [Select ID, AccountID, FirstName, LastName From Contact where AccountId != null];
         map<Id, Contact> m = new map<Id, Contact>();
         for(Contact c : contacts){
             m.put(c.AccountId, c);
@@ -206,6 +214,19 @@ public class learning_salesforce {
                 }
             }
         }
+    }
+    public static void MySecondMap(){
+        List<Contact> contacts = [SELECT ID, AccountID, LastName, FirstName FROM Contact WHERE AccountId != NULL];
+        map<Id, List<Contact>> m = new map<Id, List<Contact>>();
+        for (Contact c : contacts){
+            if(m.containsKey(c.AccountId)){
+                m.get(c.AccountId).add(c);
+            } else{
+                List<Contact> lstC = new List<Contact>{c};
+                m.put(c.AccountId, lstC);
+            }
+        }
+        system.debug(m);
     }
     public static void Recap1(){
         list<Account> accts1 = [Select Id, Name from Account where Name = 'Batman']; //Where & Select match fields
